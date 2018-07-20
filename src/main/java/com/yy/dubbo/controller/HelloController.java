@@ -2,6 +2,7 @@ package com.yy.dubbo.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.yy.dubbo.service.HelloService;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,4 +54,12 @@ public class HelloController {
         }
         return "delete fail";
     }
+@RequestMapping("/select/{id}")
+    public String selectUserById(@PathVariable("id") Integer id) {
+//        System.out.println("-----id-----"+id);
+        String str = helloService.selectById(id);
+        return str.toString();
+    }
+
+
 }
