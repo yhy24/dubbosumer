@@ -2,10 +2,7 @@ package com.yy.dubbo.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.yy.dubbo.service.HelloService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HelloController {
@@ -13,21 +10,22 @@ public class HelloController {
     @Reference
     private HelloService helloService;
 
-    @RequestMapping("/test")
+    @RequestMapping(value = "/test")
     public String test(){
         return helloService.sayHello(":老王,今晚吃啥?");
     }
 
-    @RequestMapping("/test01")
+//    @RequestMapping(value = "/test01")
+    @GetMapping(value = "/test01")
     public String to() {
         return "hello";
     }
-    @RequestMapping("/users")
+    @RequestMapping(value = "/users")
     public String findUsers() {
         String user = helloService.findUser();
         return user.toString();
     }
-    @RequestMapping("/update")
+    @RequestMapping(value = "/update")
     public String uUser() {
         String str = helloService.updateUser();
         int n = Integer.parseInt(str);
@@ -36,7 +34,7 @@ public class HelloController {
         }
         return "update fail";
     }
-    @RequestMapping("/insert")
+    @RequestMapping(value = "/insert")
     public String insertUser() {
         String str = helloService.createUser();
         int n = Integer.parseInt(str);
@@ -45,7 +43,7 @@ public class HelloController {
         }
         return "insert fail";
     }
-    @RequestMapping("/delete")
+    @RequestMapping(value = "/delete")
     public String deletetUser() {
         String str = helloService.userDelete(7);
         int n = Integer.parseInt(str);
@@ -54,7 +52,7 @@ public class HelloController {
         }
         return "delete fail";
     }
-@RequestMapping("/select/{id}")
+@RequestMapping(value = "/select/{id}")
     public String selectUserById(@PathVariable("id") Integer id) {
 //        System.out.println("-----id-----"+id);
         String str = helloService.selectById(id);
